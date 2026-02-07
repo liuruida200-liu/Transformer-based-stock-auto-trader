@@ -8,7 +8,7 @@ from model import StockTransformer
 
 CSV_FILE = "final_training_data.csv"
 BATCH_SIZE = 64
-EPOCHS = 15
+EPOCHS = 20
 LEARNING_RATE = 0.00001
 SEQ_LEN = 60
 
@@ -21,8 +21,8 @@ train_loader = DataLoader(train_dataset, batch_size = BATCH_SIZE, shuffle = True
 val_loader = DataLoader(val_dataset, batch_size = BATCH_SIZE, shuffle = False)
 sample_x, _ = train_dataset[0]
 num_features = sample_x.shape[1]
-model = StockTransformer(num_features = num_features, d_model = 64, nhead = 2, num_layers = 2,
-                         dropout = 0.5).to(device)
+model = StockTransformer(num_features = num_features, d_model = 32, nhead = 2, num_layers = 2,
+                         dropout = 0.6).to(device)
 criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr = LEARNING_RATE, weight_decay=1e-5)
 

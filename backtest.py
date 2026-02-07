@@ -60,7 +60,13 @@ def run_top_n_backtest():
     sample_x, _ = test_dataset[0]
     num_features = sample_x.shape[1]
 
-    model = StockTransformer(num_features = num_features).to(device)
+    model = StockTransformer(
+        num_features = num_features,
+        d_model = 32,
+        nhead = 2,
+        num_layers = 2,
+        dropout = 0.6
+    ).to(device)
     model.load_state_dict(torch.load(MODEL_PATH, map_location = device, weights_only = True))
     model.eval()
 
