@@ -80,6 +80,7 @@ def calc_rsi(series, window = 14):
     return 100 - (100 / (1 + rs))
 
 
+
 for ticker in tickers:
     cols_needed = [ticker, 'SPY', 'Treasury_10Y', 'VIX', 'CPI_YoY', 'Sticky_CPI']
     available_cols = [c for c in cols_needed if c in df_master.columns]
@@ -95,7 +96,7 @@ for ticker in tickers:
     df_t['Real_Rate'] = df_t['Treasury_10Y'] - df_t['CPI_YoY']
     df_t['Sticky_Gap'] = df_t['Sticky_CPI'] - df_t['CPI_YoY']
     df_t['VIX_Norm'] = df_t['VIX'] / 100.0
-    df_t['Target_Return_20d'] = df_t['Close'].pct_change(20).shift(-20)
+    df_t['Target_Return_20d'] = df_t['Close'].pct_change(periods = -20)
     df_t['Ticker'] = ticker
     df_t.dropna(inplace = True)
     feature_list.append(df_t)
